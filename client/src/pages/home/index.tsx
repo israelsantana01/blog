@@ -1,22 +1,28 @@
-import logo from '../../logo.svg';
+import { useQuery } from '@apollo/client';
+import { GET_POSTS } from '../../services/graphql/modules/posts/queries'
 import './styles.css';
 
+interface Post {
+  title: string;
+  content: string;
+  published: boolean;
+}
+
 function Home() {
+  const { loading, error, data } = useQuery<{ posts: Post[] }>(GET_POSTS);
+
+  if (loading || error) {
+    return null;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          {
+            data?.posts.map((post: any) => <h1>{post.title}</h1>)
+          }
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
