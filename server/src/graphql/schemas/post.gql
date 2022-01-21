@@ -15,8 +15,8 @@ input PostInput {
 }
 
 type Query {
-  posts: [User]
-  post: User
+  posts: [Post]
+  post: Post
 }
 
 type Mutation {
