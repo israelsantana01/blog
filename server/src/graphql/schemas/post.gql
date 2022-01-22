@@ -16,7 +16,7 @@ input PostInput {
 
 type Query {
   posts: [Post]
-  post: Post
+  post(id: String!): Post
 }
 
 type Mutation {
